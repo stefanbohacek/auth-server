@@ -15,7 +15,7 @@ Redirect your user to your authentication server while passing the following var
 - `method`: oauth or miauth
 - `instance`: domain name of the server your user needs to authenticate with (eg. mastodon.social)
 - `scope`: required scopes (eg: `scope=read:accounts+read:follows`)
-- `app`: id of your app the user will be redirected to (see `apps.js`)
+- `app`: id of your app the user will be redirected to (see `modules/apps.js`)
 
 Example URL for fediverse platforms that support OAuth:
 
@@ -38,7 +38,7 @@ https://authserver.com/?method=miauth&instance=calckey.social&scope=read:account
 ENCRYPTION_KEY="random text here to be used as your encryption key"
 ```
 
-3. Update `apps.json`.
+3. Update `modules/apps.json`.
 
 You can either redirect the user to your app that requires an authentication token:
 
