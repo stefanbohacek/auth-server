@@ -12,6 +12,10 @@ const getApps = (appName, options) => {
     "mastodon-dataviz-local": {
       "name": "Stefan's Dataviz App (LOCAL TEST)",
       "redirect_url": `http://localhost:5025/projects/fediverse?instance=${options.instance}&token=${options.access_token}`
+    },
+    "creator-and-the-machine": {
+      "name": "Creator and the machine",
+      "redirect_url": `https://curator-v2.glitch.me/app&token=${options.access_token}`
     }
   };
 
