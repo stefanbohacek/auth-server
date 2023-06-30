@@ -14,7 +14,7 @@ const getApps = (appName, options) => {
       "redirect_url": `http://localhost:5025/projects/fediverse?instance=${options.instance}&token=${options.access_token}`
     },
     "creator-and-the-machine": {
-      "name": "Creator and the machine",
+      "name": "Curator and the machine",
       "redirect_url": `https://curator-v2.glitch.me/app?instance=${options.instance}&token=${options.access_token}`
     }
   };
