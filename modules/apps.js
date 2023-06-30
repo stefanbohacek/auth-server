@@ -15,7 +15,7 @@ const getApps = (appName, options) => {
     },
     "creator-and-the-machine": {
       "name": "Creator and the machine",
-      "redirect_url": `https://curator-v2.glitch.me/app/?token=${options.access_token}`
+      "redirect_url": `https://curator-v2.glitch.me/app?token=${options.access_token}`
     }
   };
 
