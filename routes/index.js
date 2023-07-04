@@ -36,6 +36,7 @@ router.get('/', async (req, res) => {
         const redirectURL = getFailRedirectURL(req.query.app);
         res.redirect(`${redirectURL}?error=platform_not_supported`);
       } else {
+        req.query.method = fediverseMethod;
         method = fediverseMethod;
       }
     }
