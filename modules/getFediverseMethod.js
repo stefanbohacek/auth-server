@@ -20,7 +20,6 @@ const getFediverseMethod = async (domain) => {
       method = 'miauth';
       break;
   }
-  console.log({nodeInfo,platform, method});
   return method;
 };
 
