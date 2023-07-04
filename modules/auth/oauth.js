@@ -96,8 +96,7 @@ const authenticate = async (req, res) => {
       params.client_id = app.client_id;
       const redirectURI = getRedirectURI(req, res);
       // params.redirect_uri = 'urn:ietf:wg:oauth:2.0:oob';
-      console.log({redirectURI});
-      params.redirect_uri = redirectURI;
+      params.redirect_uri = redirectURI.replace('method=fediverse', 'method=oauth');
   
       const url = `https://${req.query.instance}/oauth/authorize?${queryString.stringify(params)}`;
       console.log({
