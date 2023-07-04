@@ -1,12 +1,16 @@
 # Authentication server
 
-This project is currently under active development. The authentication server currently supports:
+This project is currently under active development an is intended to be self-hosted. The authentication server currently supports:
 
 - OAuth; tested with:
     - Mastodon
     - Friendica
     - Pleroma and Akkoma
 - MiAuth; tested with Misskey and Calckey
+
+<!--
+One option is [importing it to Glitch](https://glitch.com/edit/#!/import/github/stefanbohacek/auth-server). ([Learn more about Glitch.](https://glitch.com/about))
+-->
 
 ## How to use
 
