@@ -1,12 +1,6 @@
 # Authentication server
 
-This project is currently under active development an is intended to be self-hosted. The authentication server currently supports:
-
-- OAuth; tested with:
-    - Mastodon
-    - Friendica
-    - Pleroma and Akkoma
-- MiAuth; tested with Misskey and Calckey
+This project is currently under active development an is intended to be self-hosted.
 
 <!--
 One option is [importing it to Glitch](https://glitch.com/edit/#!/import/github/stefanbohacek/auth-server). ([Learn more about Glitch.](https://glitch.com/about))
@@ -16,7 +10,10 @@ One option is [importing it to Glitch](https://glitch.com/edit/#!/import/github/
 
 Redirect your user to your authentication server while passing the following variables:
 
-- `method`: `fediverse` (or you can use `oauth` or `miauth` directly)
+- `method`:
+  - `fediverse`: automatically detect the correct method (oauth or miauth) based on the domain
+  - `oauth`: tested with Mastodon, Friendica, Pleroma, and Akkoma
+  - `miauth`: tested with Misskey and Calckey
 - `instance`: domain name of the server your user needs to authenticate with (eg. mastodon.social)
 - `scope`: required scopes (eg: `scope=read:accounts+read:follows`)
 - `app`: id of your app the user will be redirected to (see `modules/apps.js`)
