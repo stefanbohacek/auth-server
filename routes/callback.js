@@ -1,6 +1,7 @@
 import express from 'express';
 import queryString from 'query-string';
 import rejectRequest from '../modules/rejectRequest.js';
+import getNodeInfo from '../modules/getNodeInfo.js';
 import { getApp as getOAuthApp } from '../modules/auth/oauth.js';
 import { getApps as getApp } from '../modules/apps.js';
 
@@ -59,11 +60,15 @@ router.get('/', async (req, res) => {
           method: 'POST',
           body: formData
         });
+
+        const nodeInfo = await getNodeInfo(instance);
+        const platform = nodeInfo?.software?.name;
   
         try{
           const results = await resp.json();
           let myApp = getApp(appName, {
             instance,
+            platform,
             access_token: results.access_token
           });
           handleAppCallback(myApp, results.access_token, req, res);
