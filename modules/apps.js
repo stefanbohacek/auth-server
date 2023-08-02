@@ -1,6 +1,11 @@
 const getApps = (appName, options) => {
   options = options || {};
   const myApps = {
+    "localhost-3000": {
+      "name": "LOCAL TEST",
+      "redirect_url": `http://localhost:3000?instance=${options.instance}&token=${options.access_token}`,
+      "redirect_url_fail": `http://localhost:3000?error=login`
+    },
     "mastodon-browser-tools": {
       "name": "Stefan's Mastodon Tools Browser Extension",
       "showToken": true
