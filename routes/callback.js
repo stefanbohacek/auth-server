@@ -18,7 +18,7 @@ const handleAppCallback = (app, token, req, res) => {
 }
 
 router.get('/', async (req, res) => {
-  let {method, instance, scope, code, session} = req.query;
+  let {platform, method, instance, scope, code, session} = req.query;
   let appName = req.query.app;
 
   if (req.query && req.query.options){
@@ -29,6 +29,11 @@ router.get('/', async (req, res) => {
     } catch(err){ console.log('callback route error', err); }
   } else {
     method = req.query.method;
+  }
+  
+  if (!platform){
+    const nodeInfo = await getNodeInfo(instance);
+    platform = nodeInfo?.software?.name;
   }
 
 /*
@@ -60,9 +65,6 @@ router.get('/', async (req, res) => {
           method: 'POST',
           body: formData
         });
-
-        const nodeInfo = await getNodeInfo(instance);
-        const platform = nodeInfo?.software?.name;
   
         try{
           const results = await resp.json();
@@ -91,6 +93,7 @@ router.get('/', async (req, res) => {
 
       let myApp = getApp(appName, {
         instance,
+        platform,
         access_token: results.token
       });
 
