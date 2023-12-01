@@ -54,7 +54,7 @@ const createApp = async (req, res) => {
 
   formData.append('client_name', getAppName(req.query.app));
   formData.append('redirect_uris', redirectURI);
-  formData.append('scopes', req.query.scope);
+  formData.append('scopes', req.query.scope.split('+').join(' '));
   // formData.append('website', '');
 
   const resp = await fetch(`https://${instance}/api/v1/apps`, {
