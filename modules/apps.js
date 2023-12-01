@@ -20,6 +20,16 @@ const getApps = (appName, options) => {
       "redirect_url": `http://localhost:5025/projects/fediverse?instance=${options.instance}&token=${options.access_token}`,
       "redirect_url_fail": `http://localhost:5025/projects/fediverse`
     },
+    "fediverse-hashtags": {
+      "name": "Stefan's Dataviz App #2: Hashtags",
+      "redirect_url": `https://data.stefanbohacek.dev/projects/fediverse-hashtags?instance=${options.instance}&token=${options.access_token}`,
+      "redirect_url_fail": `https://data.stefanbohacek.dev/projects/fediverse-hashtags`
+    },
+    "fediverse-hashtags-local": {
+      "name": "Stefan's Dataviz App #2: Hashtags (LOCAL TEST)",
+      "redirect_url": `http://localhost:5025/projects/fediverse-hashtags?instance=${options.instance}&token=${options.access_token}`,
+      "redirect_url_fail": `http://localhost:5025/projects/fediverse-hashtags`
+    },
     "creator-and-the-machine": {
       "name": "Curator and the machine",
       "redirect_url": `https://curator-and-the-machine.glitch.me/app?instance=${options.instance}&token=${options.access_token}`,
