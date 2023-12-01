@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon -L",
+    "dev": ". ~/.nvm/nvm.sh && nvm use 18 && nodemon -L",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Stefan Bohacek",
