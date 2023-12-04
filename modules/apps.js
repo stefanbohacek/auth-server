@@ -30,6 +30,16 @@ const getApps = (appName, options) => {
       "redirect_url": `http://localhost:5025/projects/fediverse-hashtags?instance=${options.instance}&token=${options.access_token}`,
       "redirect_url_fail": `http://localhost:5025/projects/fediverse-hashtags`
     },
+    "fediverse-post-accessibility": {
+      "name": "Stefan's Dataviz App #3: Post Accessibility",
+      "redirect_url": `https://data.stefanbohacek.dev/projects/fediverse-post-accessibility?instance=${options.instance}&token=${options.access_token}`,
+      "redirect_url_fail": `https://data.stefanbohacek.dev/projects/fediverse-post-accessibility`
+    },
+    "fediverse-post-accessibility-local": {
+      "name": "Stefan's Dataviz App #3: Post Accessibility (LOCAL TEST)",
+      "redirect_url": `http://localhost:5025/projects/fediverse-post-accessibility?instance=${options.instance}&token=${options.access_token}`,
+      "redirect_url_fail": `http://localhost:5025/projects/fediverse-post-accessibility`
+    },
     "creator-and-the-machine": {
       "name": "Curator and the machine",
       "redirect_url": `https://curator-and-the-machine.glitch.me/app?instance=${options.instance}&token=${options.access_token}`,
