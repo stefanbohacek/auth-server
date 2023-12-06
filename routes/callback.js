@@ -97,7 +97,7 @@ router.get('/', async (req, res) => {
         access_token: results.token
       });
 
-      myApp.redirect_url += `&username=${results.user.username}&userid=${results.user.id}&avatarUrl=${results.user.avatarUrl}`
+      myApp.redirect_url += `&username=${results?.user?.username}&userid=${results?.user?.id}&avatarUrl=${results?.user?.avatarUrl}`
 
       handleAppCallback(myApp, results.token, req, res, results);
       break;
