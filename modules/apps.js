@@ -41,12 +41,12 @@ const getApps = (appName, options) => {
       "redirect_url_fail": `http://localhost:5025/projects/fediverse-post-accessibility`
     },
     "fediverse-emoji": {
-      "name": "Stefan's Dataviz App #2: Emoji",
+      "name": "Stefan's Dataviz App #4: Emoji",
       "redirect_url": `https://data.stefanbohacek.dev/projects/fediverse-emoji?instance=${options.instance}&token=${options.access_token}`,
       "redirect_url_fail": `https://data.stefanbohacek.dev/projects/fediverse-emoji`
     },
     "fediverse-emoji-local": {
-      "name": "Stefan's Dataviz App #2: Emoji (LOCAL TEST)",
+      "name": "Stefan's Dataviz App #4: Emoji (LOCAL TEST)",
       "redirect_url": `http://localhost:5025/projects/fediverse-emoji?instance=${options.instance}&token=${options.access_token}`,
       "redirect_url_fail": `http://localhost:5025/projects/fediverse-emoji`
     },
