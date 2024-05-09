@@ -1,7 +1,7 @@
-import getNodeInfo from './getNodeInfo.js';
+import getNodeInfo from "./getNodeInfo.js";
 
 const getFediverseMethod = async (domain) => {
-  let method = 'not_supported';
+  let method = "not_supported";
   const nodeInfo = await getNodeInfo(domain);
   const platform = nodeInfo?.software?.name;
 
@@ -12,14 +12,14 @@ const getFediverseMethod = async (domain) => {
     case "pleroma":
     case "akkoma":
     case "gotosocial":
-      method = 'oauth';
+      method = "oauth";
       break;
     case "misskey":
     case "calckey":
     case "firefish":
     case "foundkey":
     case "magnetar":
-      method = 'miauth';
+      method = "miauth";
       break;
   }
   return method;
