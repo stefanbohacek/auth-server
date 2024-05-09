@@ -11,6 +11,7 @@ const getFediverseMethod = async (domain) => {
     case "friendica":
     case "pleroma":
     case "akkoma":
+    case "gotosocial":
       method = 'oauth';
       break;
     case "misskey":

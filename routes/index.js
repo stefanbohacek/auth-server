@@ -1,13 +1,13 @@
-import express from 'express';
-import DB from 'better-sqlite3-helper';
-import rejectRequest from '../modules/rejectRequest.js';
-import getFediverseMethod from '../modules/getFediverseMethod.js';
-import { getFailRedirectURL } from '../modules/apps.js';
-import { authenticate as oAuth } from '../modules/auth/oauth.js';
-import { authenticate as miAuth } from '../modules/auth/miauth.js';
+import express from "express";
+import DB from "better-sqlite3-helper";
+import rejectRequest from "../modules/rejectRequest.js";
+import getFediverseMethod from "../modules/getFediverseMethod.js";
+import { getFailRedirectURL } from "../modules/apps.js";
+import { authenticate as oAuth } from "../modules/auth/oauth.js";
+import { authenticate as miAuth } from "../modules/auth/miauth.js";
 
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,13 +26,13 @@ DB({
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-  let {method, instance} = req.query;
+router.get("/", async (req, res) => {
+  let { method, instance } = req.query;
 
-  if (method){
-    if (method === 'fediverse'){
+  if (method) {
+    if (method === "fediverse") {
       const fediverseMethod = await getFediverseMethod(instance);
-      if (fediverseMethod === 'not_supported'){
+      if (fediverseMethod === "not_supported") {
         const redirectURL = getFailRedirectURL(req.query.app);
         res.redirect(`${redirectURL}?error=platform_not_supported`);
       } else {
@@ -42,16 +42,16 @@ router.get('/', async (req, res) => {
     }
 
     switch (method) {
-      case 'oauth':
-      case 'mastodon':
-        if (instance){
+      case "oauth":
+      case "mastodon":
+        if (instance) {
           const results = await oAuth(req, res);
         } else {
           canProceed = false;
         }
         break;
-      case 'miauth':
-        if (instance){
+      case "miauth":
+        if (instance) {
           miAuth(req, res);
         } else {
           canProceed = false;
