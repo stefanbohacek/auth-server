@@ -12,8 +12,8 @@ Redirect your user to your authentication server while passing the following var
 
 - `method`:
   - `fediverse`: automatically detect the correct method (oauth or miauth) based on the domain
-  - `oauth`: tested with Mastodon, Friendica, Pleroma, and Akkoma
-  - `miauth`: tested with Misskey and Calckey
+  - `oauth`: tested with Mastodon, Friendica, Pleroma, Akkoma, and GoToSocial
+  - `miauth`: tested with Misskey and Calckey/Firefish
 - `instance`: domain name of the server your user needs to authenticate with (eg. mastodon.social)
 - `scope`: required scopes (eg: `scope=read:accounts+read:follows`)
 - `app`: id of your app the user will be redirected to (see `modules/apps.js`)
