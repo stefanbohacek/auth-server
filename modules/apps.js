@@ -1,7 +1,7 @@
 const getApps = (appName, options) => {
   options = options || {};
   const myApps = {
-    "localhost-3000": {
+    "testapp": {
       "name": "LOCAL TEST",
       "redirect_url": `http://localhost:3000?instance=${options.instance}&platform=${options.platform}&token=${options.access_token}`,
       "redirect_url_fail": `http://localhost:3000?error=login`
