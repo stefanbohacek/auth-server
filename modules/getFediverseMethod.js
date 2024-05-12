@@ -19,6 +19,7 @@ const getFediverseMethod = async (domain) => {
     case "firefish":
     case "foundkey":
     case "magnetar":
+    case "sharkey":
       method = "miauth";
       break;
   }
