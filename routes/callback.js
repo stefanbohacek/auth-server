@@ -18,7 +18,7 @@ const handleAppCallback = (app, token, req, res) => {
 };
 
 router.get("/", async (req, res) => {
-  let { platform, method, instance, scope, code, session } = req.query;
+  let { platform, method, instance, environment, scope, code, session } = req.query;
   let appName = req.query.app;
 
   if (req.query && req.query.options) {
@@ -80,6 +80,7 @@ router.get("/", async (req, res) => {
           let myApp = getApp(appName, {
             instance,
             platform,
+            environment,
             access_token: results.access_token,
           });
           handleAppCallback(myApp, results.access_token, req, res);
