@@ -63,6 +63,7 @@ const getApps = (appName, options) => {
         redirect_url: `http://localhost:5025/projects/fediverse-emoji?instance=${options.instance}&token=${options.access_token}`,
         redirect_url_fail: `http://localhost:5025/projects/fediverse-emoji`,
       },
+    },
     "pinned-posts": {
       production: {
         name: "Stefan's Pinned Posts Organizer",
@@ -86,7 +87,9 @@ const getApps = (appName, options) => {
   };
 
   if (myApps[appName]) {
-    return myApps[appName][options.environment ? options.environment : "production"];
+    return myApps[appName][
+      options.environment ? options.environment : "production"
+    ];
   } else {
     return {
       name: "Stefan's Test App",
