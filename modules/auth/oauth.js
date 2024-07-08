@@ -13,7 +13,8 @@ const getInternalRedirectURIparams = (req, res) => {
     method: req.query.method,
     app: req.query.app,
     scope: req.query.scope.split('+').join(' '),
-    instance: req.query.instance
+    instance: req.query.instance,
+    environment: req.query.environment || "production"
   };
 
   return internalRedirectURIparams;
@@ -22,11 +23,15 @@ const getInternalRedirectURIparams = (req, res) => {
 const getApp = async (req, res, decrypted) => {
   const instance = req.query.instance;
   const appName = req.query.app;
+  const environment = req.query.environment || "production";
+
+  console.log("environment", environment);
 
   let app = DB().queryFirstRow(
-    'SELECT * FROM oauth_apps WHERE instance=? AND app=?',
+    'SELECT * FROM oauth_apps WHERE instance=? AND app=? AND environment=?',
     instance,
-    appName
+    appName,
+    environment
   );
 
   if (!app){
@@ -46,6 +51,7 @@ const getApp = async (req, res, decrypted) => {
 const createApp = async (req, res) => {
   const appName = req.query.app;
   const instance = req.query.instance;
+  const environment = req.query.environment || "production";
   const method = req.query.method;
 
   const redirectURI = getRedirectURI(req, res).replace('method=fediverse', `method=${method}`);
@@ -71,6 +77,7 @@ const createApp = async (req, res) => {
 
     DB().insert('oauth_apps', {
       app: appName,
+      environment: environment,
       instance: instance,
       id: results.id,
       client_id: results.client_id,
@@ -93,6 +100,7 @@ const authenticate = async (req, res) => {
   if (req.query.scope && req.query.instance){
     getApp(req, res).then(app => {
       params.scope = req.query.scope;
+      params.environment = req.query.environment || "production";
       params.response_type = 'code';
       params.instance = req.query.instance;
       params.client_id = app.client_id;

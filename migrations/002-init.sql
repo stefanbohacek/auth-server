@@ -2,6 +2,7 @@
 CREATE TABLE `oauth_apps` (
   instance TEXT,
   app TEXT,
+  environment TEXT,
   id INTEGER,
   client_id TEXT,
   client_secret TEXT,

@@ -18,7 +18,12 @@ const handleAppCallback = (app, token, req, res) => {
 };
 
 router.get("/", async (req, res) => {
-  let { platform, method, instance, environment, scope, code, session } = req.query;
+  let { platform, method, instance, environment, scope, code, session } =
+    req.query;
+
+  if (!environment) {
+    environment = "production";
+  }
   let appName = req.query.app;
 
   if (req.query && req.query.options) {
@@ -41,6 +46,7 @@ router.get("/", async (req, res) => {
   /*
   req.query.method
   req.query.instance
+  req.query.environment
   req.query.code
 */
   let formData = new URLSearchParams();
@@ -50,6 +56,7 @@ router.get("/", async (req, res) => {
     case "mastodon":
       let internalRedirectURIparams = {
         method,
+        environment,
         scope: scope.split("+").join(" "),
       };
 
@@ -69,6 +76,7 @@ router.get("/", async (req, res) => {
           )}`
         );
         formData.append("scope", scope);
+        formData.append("environment", environment);
 
         const resp = await fetch(`https://${instance}/oauth/token`, {
           method: "POST",
