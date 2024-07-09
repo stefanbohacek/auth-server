@@ -67,8 +67,8 @@ const getApps = (appName, options) => {
     "pinned-posts": {
       production: {
         name: "Stefan's Pinned Posts Organizer",
-        redirect_url: `https://pinned-posts.stefanbohacek.dev/?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://pinned-posts.stefanbohacek.dev/error`,
+        redirect_url: `https://pinned-posts-organizer.stefanbohacek.dev/?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://pinned-posts-organizer.stefanbohacek.dev/error`,
       },
       development: {
         name: "Stefan's Pinned Posts Organizer (LOCAL TEST)",
