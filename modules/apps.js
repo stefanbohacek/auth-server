@@ -87,8 +87,8 @@ const getApps = (appName, options) => {
     "signatures": {
       production: {
         name: "Fediverse Signatures",
-        redirect_url: `https://signatures.stefanbohacek.com/signatures?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://signatures.stefanbohacek.com/error`,
+        redirect_url: `https://signatures.stefanbohacek.dev/signatures?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://signatures.stefanbohacek.dev/error`,
       },
       development: {
         name: "Fediverse Signatures (LOCAL TEST)",
