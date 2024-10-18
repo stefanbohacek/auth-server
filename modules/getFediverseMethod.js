@@ -12,7 +12,7 @@ const getFediverseMethod = async (domain) => {
     case "pleroma":
     case "akkoma":
     case "gotosocial":
-    // case "pixelfed":
+    case "pixelfed":
       method = "oauth";
       break;
     case "misskey":
