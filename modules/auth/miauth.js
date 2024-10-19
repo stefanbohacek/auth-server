@@ -29,7 +29,9 @@ const authenticate = async (req, res) => {
 
     const callbackURL = `${callbackServer}callback?options=${JSON.stringify(options)}`;
 
-    const url = `https://${req.query.instance}/miauth/${appID}?name=${encodeURIComponent(appName)}&permission=${req.query.scope.replace("read:accounts", "read:account").split(' ').join(',')}&callback=${callbackURL}`;
+    let permissionsMapped = req.query.scope.replace("read:accounts", "read:account").replace("profile", "read:account");
+
+    const url = `https://${req.query.instance}/miauth/${appID}?name=${encodeURIComponent(appName)}&permission=${permissionsMapped.split(' ').join(',')}&callback=${callbackURL}`;
     res.redirect(url);
   } else {
     rejectRequest(req, res, 422);
