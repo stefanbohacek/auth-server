@@ -5,7 +5,7 @@ import rejectRequest from '../rejectRequest.js';
 import { getAppName } from '../apps.js';
 
 const authenticate = async (req, res) => {
-  // const callbackServer = 'https://auth.stefanbohacek.dev';
+  // const callbackServer = 'https://auth.stefanbohacek.com';
   // const callbackServer = 'http://localhost:3000';
 
   const hostname = req.headers.host;

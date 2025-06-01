@@ -19,8 +19,8 @@ const getApps = (appName, options) => {
     "mastodon-dataviz": {
       production: {
         name: "Stefan's Dataviz App",
-        redirect_url: `https://data.stefanbohacek.dev/projects/fediverse?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://data.stefanbohacek.dev/projects/fediverse`,
+        redirect_url: `https://data.stefanbohacek.com/projects/fediverse?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse`,
       },
       development: {
         name: "Stefan's Dataviz App (LOCAL TEST)",
@@ -31,8 +31,8 @@ const getApps = (appName, options) => {
     "fediverse-hashtags": {
       production: {
         name: "Stefan's Dataviz App #2: Hashtags",
-        redirect_url: `https://data.stefanbohacek.dev/projects/fediverse-hashtags?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://data.stefanbohacek.dev/projects/fediverse-hashtags`,
+        redirect_url: `https://data.stefanbohacek.com/projects/fediverse-hashtags?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse-hashtags`,
       },
       development: {
         name: "Stefan's Dataviz App #2: Hashtags (LOCAL TEST)",
@@ -43,8 +43,8 @@ const getApps = (appName, options) => {
     "fediverse-post-accessibility": {
       production: {
         name: "Stefan's Dataviz App #3: Post Accessibility",
-        redirect_url: `https://data.stefanbohacek.dev/projects/fediverse-post-accessibility?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://data.stefanbohacek.dev/projects/fediverse-post-accessibility`,
+        redirect_url: `https://data.stefanbohacek.com/projects/fediverse-post-accessibility?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse-post-accessibility`,
       },
       development: {
         name: "Stefan's Dataviz App #3: Post Accessibility (LOCAL TEST)",
@@ -55,8 +55,8 @@ const getApps = (appName, options) => {
     "fediverse-emoji": {
       production: {
         name: "Stefan's Dataviz App #4: Emoji",
-        redirect_url: `https://data.stefanbohacek.dev/projects/fediverse-emoji?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://data.stefanbohacek.dev/projects/fediverse-emoji`,
+        redirect_url: `https://data.stefanbohacek.com/projects/fediverse-emoji?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse-emoji`,
       },
       development: {
         name: "Stefan's Dataviz App #4: Emoji (LOCAL TEST)",
@@ -67,8 +67,8 @@ const getApps = (appName, options) => {
     "pinned-posts": {
       production: {
         name: "Stefan's Pinned Posts Organizer",
-        redirect_url: `https://pinned-posts-organizer.stefanbohacek.dev/?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://pinned-posts-organizer.stefanbohacek.dev/error`,
+        redirect_url: `https://pinned-posts-organizer.stefanbohacek.com/?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://pinned-posts-organizer.stefanbohacek.com/error`,
       },
       development: {
         name: "Stefan's Pinned Posts Organizer (LOCAL TEST)",
@@ -87,8 +87,8 @@ const getApps = (appName, options) => {
     "signatures": {
       production: {
         name: "Fediverse Signatures",
-        redirect_url: `https://signatures.stefanbohacek.dev/signatures?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://signatures.stefanbohacek.dev/error`,
+        redirect_url: `https://signatures.stefanbohacek.com/signatures?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://signatures.stefanbohacek.com/error`,
       },
       development: {
         name: "Fediverse Signatures (LOCAL TEST)",
