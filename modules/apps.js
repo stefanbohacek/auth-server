@@ -79,8 +79,8 @@ const getApps = (appName, options) => {
     "creator-and-the-machine": {
       production: {
         name: "Curator and the machine",
-        redirect_url: `https://curator-and-the-machine.glitch.me/app?instance=${options.instance}&token=${options.access_token}`,
-        redirect_url_fail: `https://curator-and-the-machine.glitch.me/app`,
+        redirect_url: `https://curator-and-the-machine.stefanbohacek.com/app?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://curator-and-the-machine.stefanbohacek.com/app`,
       },
       development: {},
     },
