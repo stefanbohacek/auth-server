@@ -64,6 +64,18 @@ const getApps = (appName, options) => {
         redirect_url_fail: `http://localhost:5025/projects/fediverse-emoji`,
       },
     },
+    "fediverse-follows": {
+      production: {
+        name: "Stefan's Dataviz App #4: follows",
+        redirect_url: `https://data.stefanbohacek.com/projects/fediverse-follows?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse-follows`,
+      },
+      development: {
+        name: "Stefan's Dataviz App #4: follows (LOCAL TEST)",
+        redirect_url: `http://localhost:5025/projects/fediverse-follows?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `http://localhost:5025/projects/fediverse-follows`,
+      },
+    },
     "pinned-posts": {
       production: {
         name: "Stefan's Pinned Posts Organizer",
