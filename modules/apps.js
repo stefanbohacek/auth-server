@@ -66,12 +66,12 @@ const getApps = (appName, options) => {
     },
     "fediverse-follows": {
       production: {
-        name: "Stefan's Dataviz App #4: follows",
+        name: "Stefan's Dataviz App #5: Fediverse Follows",
         redirect_url: `https://data.stefanbohacek.com/projects/fediverse-follows?instance=${options.instance}&token=${options.access_token}`,
         redirect_url_fail: `https://data.stefanbohacek.com/projects/fediverse-follows`,
       },
       development: {
-        name: "Stefan's Dataviz App #4: follows (LOCAL TEST)",
+        name: "Stefan's Dataviz App #5: Fediverse Follows (LOCAL TEST)",
         redirect_url: `http://localhost:5025/projects/fediverse-follows?instance=${options.instance}&token=${options.access_token}`,
         redirect_url_fail: `http://localhost:5025/projects/fediverse-follows`,
       },
