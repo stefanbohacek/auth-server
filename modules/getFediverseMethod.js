@@ -1,6 +1,6 @@
 import getNodeInfo from "./getNodeInfo.js";
 
-const getFediverseMethod = async (domain) => {
+export default async (domain) => {
   let method = "not_supported";
   const nodeInfo = await getNodeInfo(domain);
   const platform = nodeInfo?.software?.name;
@@ -26,5 +26,3 @@ const getFediverseMethod = async (domain) => {
   }
   return method;
 };
-
-export default getFediverseMethod;

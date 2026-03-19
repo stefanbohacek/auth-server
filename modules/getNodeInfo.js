@@ -1,7 +1,7 @@
 import NodeCache from 'node-cache';
 const appCache = new NodeCache( { stdTTL: 100, checkperiod: 60 } );
 
-const getNodeInfo = async (domain, full) => {
+export default async (domain, full) => {
   let nodeInfoURL, nodeInfo = {
     domain
   };
@@ -47,5 +47,3 @@ const getNodeInfo = async (domain, full) => {
 
   return nodeInfo;
 };
-
-export default getNodeInfo;

@@ -1,24 +1,25 @@
-import DB from 'better-sqlite3-helper';
-import queryString from 'query-string';
-import rejectRequest from '../rejectRequest.js';
-import { decrypt, encrypt } from '../encryption.js';
-import { getAppName } from '../apps.js';
+import DB from "better-sqlite3-helper";
+import queryString from "query-string";
+import isValidServer from "../isValidServer.js";
+import rejectRequest from "../rejectRequest.js";
+import { decrypt, encrypt } from "../encryption.js";
+import { getAppName } from "../apps.js";
 
-const getRedirectURI = (req, res) => {
-  return `${process.env.ENVIRONMENT === 'production' ? 'https' : req.protocol}://${req.get('host')}/callback?${queryString.stringify(getInternalRedirectURIparams(req, res))}`;  
-}
+const getRedirectURI = (req, res, method) => {
+  return `${process.env.ENVIRONMENT === "production" ? "https" : req.protocol}://${req.get("host")}/callback?${queryString.stringify(getInternalRedirectURIparams(req, res, method))}`;
+};
 
-const getInternalRedirectURIparams = (req, res) => {
+const getInternalRedirectURIparams = (req, res, method) => {
   const internalRedirectURIparams = {
-    method: req.query.method,
+    method: method || req.query.method,
     app: req.query.app,
-    scope: req.query.scope.split('+').join(' '),
+    scope: req.query.scope.split("+").join(" "),
     instance: req.query.instance,
-    environment: req.query.environment || "production"
+    environment: req.query.environment || "production",
   };
 
   return internalRedirectURIparams;
-}
+};
 
 const getApp = async (req, res, decrypted) => {
   const instance = req.query.instance;
@@ -28,54 +29,59 @@ const getApp = async (req, res, decrypted) => {
   console.log("environment", environment);
 
   let app = DB().queryFirstRow(
-    'SELECT * FROM oauth_apps WHERE instance=? AND app=? AND environment=?',
+    "SELECT * FROM oauth_apps WHERE instance=? AND app=? AND environment=?",
     instance,
     appName,
-    environment
+    environment,
   );
 
-  if (!app){
+  if (!app) {
     app = await createApp(req, res);
   } else {
-    console.log({'loaded_app_from_DB': app});
+    console.log({ loaded_app_from_DB: app });
   }
-  
+
   if (decrypted) {
-    app['appName'] = appName;
-    app['client_secret'] = decrypt(app['client_secret']);
+    app["appName"] = appName;
+    app["client_secret"] = decrypt(app["client_secret"]);
   }
-  
+
   return app;
-}
+};
 
 const createApp = async (req, res) => {
-  const appName = req.query.app;
   const instance = req.query.instance;
+
+  if (!isValidServer(instance)) {
+    rejectRequest(req, res, 422);
+    return;
+  }
+
+  const appName = req.query.app;
   const environment = req.query.environment || "production";
   const method = req.query.method;
 
-  const redirectURI = getRedirectURI(req, res).replace('method=fediverse', `method=${method}`);
-  const internalRedirectURIparams = getInternalRedirectURIparams(req, res);
+  const redirectURI = getRedirectURI(req, res, method);
   let formData = new URLSearchParams();
 
-  formData.append('client_name', getAppName(req.query.app));
-  formData.append('redirect_uris', redirectURI);
-  formData.append('scopes', req.query.scope.split('+').join(' '));
+  formData.append("client_name", getAppName(req.query.app));
+  formData.append("redirect_uris", redirectURI);
+  formData.append("scopes", req.query.scope.split("+").join(" "));
   // formData.append('website', '');
 
   const resp = await fetch(`https://${instance}/api/v1/apps`, {
-    method: 'POST',
-    body: formData
+    method: "POST",
+    body: formData,
   });
 
   let results = {};
 
-  try{
+  try {
     results = await resp.json();
-    console.log({'created_new_app' : {results}});
-    console.log('saving app to DB...');
+    console.log({ created_new_app: { results } });
+    console.log("saving app to DB...");
 
-    DB().insert('oauth_apps', {
+    DB().insert("oauth_apps", {
       app: appName,
       environment: environment,
       instance: instance,
@@ -84,36 +90,36 @@ const createApp = async (req, res) => {
       client_secret: results.client_secret,
       vapid_key: results.vapid_key,
     });
-  } catch (err){
-    console.log('createApp:error', {err});
-    console.log('debug:resp', resp);
-    results = await resp.text()
-    console.log('createApp:results', {results});
-  }        
-  return results;  
-}
+  } catch (err) {
+    console.log("createApp:error", { err });
+    console.log("debug:resp", resp);
+    results = await resp.text();
+    console.log("createApp:results", { results });
+  }
+  return results;
+};
 
 const authenticate = async (req, res) => {
-  const internalRedirectURIparams = getInternalRedirectURIparams(req, res);
   let params = {};
 
-  if (req.query.scope && req.query.instance){
-    getApp(req, res).then(app => {
+  if (req.query.scope && req.query.instance) {
+    getApp(req, res).then((app) => {
+      const method = req.query.method;
       params.scope = req.query.scope;
       params.environment = req.query.environment || "production";
-      params.response_type = 'code';
+      params.response_type = "code";
       params.instance = req.query.instance;
       params.client_id = app.client_id;
-      const redirectURI = getRedirectURI(req, res);
+      const redirectURI = getRedirectURI(req, res, method);
       // params.redirect_uri = 'urn:ietf:wg:oauth:2.0:oob';
       params.redirect_uri = redirectURI;
-  
+
       const url = `https://${req.query.instance}/oauth/authorize?${queryString.stringify(params)}`;
       console.log({
-        'authenticate': {
+        authenticate: {
           params,
-          url
-        }
+          url,
+        },
       });
       res.redirect(url);
       return true;
@@ -121,7 +127,7 @@ const authenticate = async (req, res) => {
   } else {
     rejectRequest(req, res, 422);
     return false;
-  }  
+  }
 };
 
-export {authenticate, getApp};
+export { authenticate, getApp };
