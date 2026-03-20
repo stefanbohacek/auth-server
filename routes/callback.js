@@ -108,8 +108,15 @@ router.get("/", async (req, res) => {
       // console.log("miauth debug: respText:", respText.substring(0, 200));
 
       if (!resp.ok) {
-        console.log(`miauth check failed: ${resp.status}`);
-        rejectRequest(req, res, 422);
+        console.log(`miauth debug: login failed: ${resp.status}`);
+
+        const myApp = getApp(appName, { instance, platform, environment });
+        if (myApp.redirect_url_fail) {
+          res.redirect(`${myApp.redirect_url_fail}?error=server_blocked`);
+        } else {
+          rejectRequest(req, res, 422);
+        }
+
         break;
       }
 
