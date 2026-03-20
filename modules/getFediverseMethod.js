@@ -12,7 +12,7 @@ export default async (domain) => {
     case "pleroma":
     case "akkoma":
     case "gotosocial":
-    // case "pixelfed":
+      // case "pixelfed":
       method = "oauth";
       break;
     case "misskey":
@@ -24,5 +24,5 @@ export default async (domain) => {
       method = "miauth";
       break;
   }
-  return method;
+  return { method, platform };
 };

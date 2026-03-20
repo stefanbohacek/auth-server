@@ -1,46 +1,45 @@
-import NodeCache from 'node-cache';
-const appCache = new NodeCache( { stdTTL: 100, checkperiod: 60 } );
+import NodeCache from "node-cache";
+const appCache = new NodeCache({ stdTTL: 100, checkperiod: 60 });
 
 export default async (domain, full) => {
-  let nodeInfoURL, nodeInfo = {
-    domain
-  };
+  let nodeInfoURL,
+    nodeInfo = {
+      domain,
+    };
 
-  const cacheKey = `nodeinfo:${domain}${full ? ':full' : ''}`;
+  const cacheKey = `nodeinfo:${domain}${full ? ":full" : ""}`;
   const cachedData = appCache.get(cacheKey);
 
-  if (cachedData == undefined){
-    try{
+  if (cachedData == undefined) {
+    try {
       const resp = await fetch(`https://${domain}/.well-known/nodeinfo`);
       let results = await resp.json();
-    
-      if (results.links){
-        results.links.forEach(link => {
-          if (link.rel.includes('nodeinfo.diaspora.software/ns/schema')){
+
+      if (results.links) {
+        results.links.forEach((link) => {
+          if (link.rel.includes("nodeinfo.diaspora.software/ns/schema")) {
             nodeInfoURL = link.href;
           }
         });
       }
 
-      if (nodeInfoURL){
+      if (nodeInfoURL) {
         const resp = await fetch(nodeInfoURL);
         let results = await resp.json();
-  
-        if (full){
+
+        if (full) {
           nodeInfo.nodeInfo = results;
         } else {
           nodeInfo.software = {
             name: results?.software?.name,
             version: results?.software?.version,
-          }
+          };
         }
-      }        
+      }
       const success = appCache.set(cacheKey, nodeInfo);
-    } catch(err){
-      console.log('node-info error', err);
+    } catch (err) {
+      console.log("node-info error", err);
     }
-
-
   } else {
     nodeInfo = cachedData;
   }
