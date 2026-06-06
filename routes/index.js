@@ -3,6 +3,7 @@ import DB from "better-sqlite3-helper";
 import rejectRequest from "../modules/rejectRequest.js";
 import getFediverseMethod from "../modules/getFediverseMethod.js";
 import getNodeInfo from "../modules/getNodeInfo.js";
+import normalizeInstance from "../modules/normalizeInstance.js";
 import { getFailRedirectURL } from "../modules/apps.js";
 import { authenticate as oAuth } from "../modules/auth/oauth.js";
 import { authenticate as miAuth } from "../modules/auth/miauth.js";
@@ -38,7 +39,9 @@ const normalizeScopes = (scope, platform) => {
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  let { method, instance } = req.query;
+  let { method } = req.query;
+  let instance = normalizeInstance(req.query.instance);
+  req.query.instance = instance;
 
   if (method) {
     if (method === "fediverse") {
