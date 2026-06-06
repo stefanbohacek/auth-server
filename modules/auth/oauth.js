@@ -28,6 +28,10 @@ const getApp = async (req, res, decrypted) => {
     // console.log({ loaded_app_from_DB: app });
   }
 
+  if (!app) {
+    return;
+  }
+
   if (decrypted) {
     app["appName"] = appName;
     app["client_secret"] = decrypt(app["client_secret"]);
@@ -62,7 +66,9 @@ const createApp = async (req, res) => {
 
   try {
     if (!resp.ok) {
-      throw new Error(`App registration failed: ${resp.status}`);
+      const body = await resp.text();
+      console.log("createApp:error", { status: resp.status, body });
+      throw new Error(`createApp error: ${resp.status}`);
     }
     results = await resp.json();
 
@@ -76,7 +82,8 @@ const createApp = async (req, res) => {
       vapid_key: results.vapid_key,
     });
   } catch (err) {
-    results = await resp.text();
+    console.log("createApp error", { err });
+    throw err;
   }
   return results;
 };
