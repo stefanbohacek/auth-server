@@ -108,6 +108,18 @@ const getApps = (appName, options) => {
         redirect_url_fail: `http://localhost:3000/error`,
       },
     },
+    "fediverse-avatars": {
+      production: {
+        name: "Fediverse Avatars",
+        redirect_url: `https://avatars.jointhefediverse.net?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `https://avatars.jointhefediverse/?error=oauth-fail`,
+      },
+      development: {
+        name: "Fediverse Avatars (LOCAL TEST)",
+        redirect_url: `http://localhost:8080/?instance=${options.instance}&token=${options.access_token}`,
+        redirect_url_fail: `http://localhost:8080/?error=oauth-fail`,
+      },
+    },
   };
 
   if (myApps[appName]) {
